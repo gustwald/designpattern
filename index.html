@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="formContainer">
+            <h1 class="addmovie">Add a movie</h1>
+        <form id="movieForm">
+        <input id="titleValue" type="text" placeholder="Title"></input><br>
+        <input id="yearValue" type="text" placeholder="Year"></input><br>
+        
+        <label for="scifi">Sci-Fi</label>
+        <input value="Sci-Fi" id="scifi" name="genre" class="genre" type="checkbox"></input><br>
+            <label for="drama">Drama</label>
+        <input value="Drama" id="drama" name="genre" class="genre" type="checkbox"></input><br>
+            <label for="Comedy">Comedy</label>
+        <input value="Comedy" id="comedy" name="genre" class="genre" type="checkbox"></input><br>
+            <label for="thriller">Thriller</label>
+        <input value="Thriller" id="thriller" name="genre" class="genre" type="checkbox"></input><br>
+
+        <input id="coverValue" type="text" placeholder="Coverphoto (url)"></input><br>
+
+        <input value="1" name="ratingvalue" class="rating" type="radio">1</input>
+        <input value="2" name="ratingvalue" class="rating" type="radio">2</input>
+        <input value="3" name="ratingvalue" class="rating" type="radio">3</input>
+        <input value="4" name="ratingvalue" class="rating" type="radio">4</input>
+        <input value="5" name="ratingvalue" class="rating" type="radio">5</input>
+        <input value="6" name="ratingvalue" class="rating" type="radio">6</input>
+        <input value="7" name="ratingvalue" class="rating" type="radio">7</input>
+        <input value="8" name="ratingvalue" class="rating" type="radio">8</input>
+        <input value="9" name="ratingvalue" class="rating" type="radio">9</input>
+        <input value="10" name="ratingvalue" class="rating" type="radio">10</input>
+        
+        
+        <br>
+        
+        <button type="submit">Add movie</button>
+    </form>
+    </div>
+    <div id="movies">
+        <button id="showAllMovies" type="button">View all movies</button>
+        <button id="getTopMovie" type="button">Get top rated movie</button>
+        <button id="getWorstMovie" type="button">Get worst rated movie</button><br>
+        <button id="movieByYear" type="button">Get movie by year</button>
+        <input type="text" id="movieByYearText" placeholder="year"></input><br>
+        <button id="rateMovies" type="button">Rate movies</button><br>
+        <button id="movieByGenre" type="button">Get movie by genre</button><br>
+
+        <label for="scifi">Sci-Fi</label>
+        <input value="Sci-Fi" id="scifi" name="" class="genre" type="checkbox"></input><br>
+            <label for="drama">Drama</label>
+        <input value="Drama" id="drama" name="" class="genre" type="checkbox"></input><br>
+            <label for="Comedy">Comedy</label>
+        <input value="Comedy" id="comedy" name="" class="genre" type="checkbox"></input><br>
+            <label for="thriller">Thriller</label>
+        <input value="Thriller" id="thriller" name="" class="genre" type="checkbox"></input><br>
+</div>
+</div>
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>

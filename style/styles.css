@@ -1,0 +1,61 @@
+*:focus {
+    outline: none;
+}
+#movies{
+    width: 50%;
+}
+/*body{
+    background-image: url("../img/bg.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}*/
+
+#showAllMovies{
+    margin: 20px 0px 20px 0px;
+}
+input[type=text] {
+   width: 200px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus {
+    
+}
+button {
+    background-color: lightblue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+}
+button:hover{
+    color: black;
+}
+/*form*/
+.formContainer{
+    width: 50%;
+}
+form{
+	padding-top: 2em;
+	padding-bottom: 2em;
+	text-align: center;
+}
+form input {
+    margin: 15px;
+}
+.addmovie{
+    font-family: 'Open-sans', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+}
