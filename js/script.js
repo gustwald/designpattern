@@ -46,6 +46,7 @@ const getMovies = () => {
 
 //todo
 //om två filmer har samma rating
+//om du listat alla filmer kan du ej använda annan funktion
 
 const getWorstRatedMovie = () => {
   const movieContainer = document.getElementById("movies");
@@ -54,9 +55,9 @@ const getWorstRatedMovie = () => {
     for (let movie of movieDatabase) arr.push(parseInt(movie.rating));
                     
     const i = arr.indexOf(Math.min(...arr));
-    const title = movieDatabase[i].title
+    const title = movieDatabase[i].title;
 
-    movieContainer.innerHTML += title;  
+    movieContainer.innerHTML += `<h1>Worst rated movie: ${title}</h1>`;  
 }
 
 const getBestRatedMovie = () => {
@@ -66,9 +67,9 @@ const getBestRatedMovie = () => {
     for (let movie of movieDatabase) arr.push(parseInt(movie.rating));
           
     const i = arr.indexOf(Math.max(...arr));
-    const title = movieDatabase[i].title
+    const title = movieDatabase[i].title;
 
-    movieContainer.innerHTML += title;
+    movieContainer.innerHTML += `<h1>Best rated movie: ${title}</h1>`;
 }
 
 const getMovieByGenre = () => {
