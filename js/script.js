@@ -73,7 +73,21 @@ const getBestRatedMovie = () => {
 }
 
 const getMovieByGenre = () => {
-  
+    
+    for (let movie of movieDatabase) {
+        
+      }
+
+}
+
+const getMovieByYear = () => {
+    const year = document.getElementById('movieByYearText').value;
+    for (let movie of movieDatabase) {
+        if(parseInt(year) == movie.year){
+          console.log(movie.title);
+        }
+      }
+
 }
 
 //buttons
@@ -82,3 +96,4 @@ document.getElementById("showAllMovies").addEventListener("click", getMovies);
 document.getElementById("getWorstMovie").addEventListener("click", getWorstRatedMovie);
 document.getElementById("getTopMovie").addEventListener("click", getBestRatedMovie);
 document.getElementById("movieByGenre").addEventListener("click", getMovieByGenre);
+document.getElementById("movieByYear").addEventListener("click", getMovieByYear);
