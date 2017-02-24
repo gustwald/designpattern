@@ -22,16 +22,16 @@ const submitForm = (event) => {
   let movie = new Movie(titlevalue, yearvalue, genrevalue, ratingvalue, covervalue);
 
   movieDatabase.push(movie);
-
+  
   event.preventDefault();
-
 }
 console.log(movieDatabase);
 
 
+
 const getMovies = () => {
     const movieContainer = document.getElementById("movies");
-    
+   
     let html = '';
     for (let movie of movieDatabase) {
         html += `<h1>${movie.title}</h1>
@@ -40,13 +40,13 @@ const getMovies = () => {
                 Genre: ${movie.genre}<br>
                 Rating: ${movie.rating}`;
       }
-     movieContainer.innerHTML += html;
+     movieContainer.innerHTML = html;
 }
 
 
 //todo
 //om två filmer har samma rating
-//om du listat alla filmer kan du ej använda annan funktion
+
 
 const getWorstRatedMovie = () => {
   const movieContainer = document.getElementById("movies");
@@ -57,7 +57,7 @@ const getWorstRatedMovie = () => {
     const i = arr.indexOf(Math.min(...arr));
     const title = movieDatabase[i].title;
 
-    movieContainer.innerHTML += `<h1>Worst rated movie: ${title}</h1>`;  
+    movieContainer.innerHTML = `<h1>Worst rated movie: ${title}</h1>`;  
 }
 
 const getBestRatedMovie = () => {
@@ -69,22 +69,31 @@ const getBestRatedMovie = () => {
     const i = arr.indexOf(Math.max(...arr));
     const title = movieDatabase[i].title;
 
-    movieContainer.innerHTML += `<h1>Best rated movie: ${title}</h1>`;
+    movieContainer.innerHTML = `<h1>Best rated movie: ${title}</h1>`;
 }
-
+//tar bara senaste
 const getMovieByGenre = () => {
+    const movieContainer = document.getElementById("movies");
+    const genre = [].filter.call(document.getElementsByName('sortByGenre'), (c) => c.checked).map(c => c.value);
+
+   for (let movie of movieDatabase) {
+	if(genre.some(function (v) { return movie.genre.indexOf(v) >= 0; })){
+		movieContainer.innerHTML += `<h1>Displaying movies from genre ${genre}: ${movie.title}</h1>`;
+       
+    }
+
+ }
+
     
-    for (let movie of movieDatabase) {
-        
-      }
 
 }
-
+//visar bara senaste
 const getMovieByYear = () => {
+    const movieContainer = document.getElementById("movies");
     const year = document.getElementById('movieByYearText').value;
     for (let movie of movieDatabase) {
         if(parseInt(year) == movie.year){
-          console.log(movie.title);
+          movieContainer.innerHTML = `<h1>Displaying movies ${year}: ${movie.title}</h1>`;
         }
       }
 
