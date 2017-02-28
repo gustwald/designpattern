@@ -26,11 +26,12 @@ const submitForm = (event) => {
 
   output.innerHTML = "Movie added!";
   setInterval(function(){ output.innerHTML = ""; }, 3000);
-  
+
   event.preventDefault();
 }
-console.log(movieDatabase);
 
+//  console.log(JSON.stringify(genre));
+console.log(movieDatabase);
 
 
 const getMovies = () => {
@@ -50,7 +51,6 @@ const getMovies = () => {
 
 //todo
 //om två filmer har samma rating
-
 
 const getWorstRatedMovie = () => {
 
@@ -77,75 +77,87 @@ const getBestRatedMovie = () => {
 const getMovieByGenre = () => {
     const movieContainer = document.getElementById("movies");
     const genre = [].filter.call(document.getElementsByName('sortByGenre'), (c) => c.checked).map(c => c.value);
-
-   for (let movie of movieDatabase) {
-	    if(genre.some(function (mov) { return movie.genre.indexOf(mov) >= 0; })){
-	    movieContainer.innerHTML += `<h1>Displaying movies from genre ${genre}: ${movie.title}</h1>`;
-       
-    }
-
- }
-
-    
-
+    const data = [];
+ 
+       movieDatabase.filter(movie =>{
+             for(let i = 0; i < genre.length; i++){
+                 if(movie.genre.indexOf(genre[i]) > -1){
+                     data.push({ genre: genre, title: movie.title });
+                 }
+             }
+          })
+          return data;
 }
 //visar bara senaste
 const getMovieByYear = () => {
 
     const data = [];
     const year = document.getElementById('movieByYearText').value;
+
     for (let movie of movieDatabase) {
         if(parseInt(year) == movie.year){
            data.push({ year: year, title: movie.title });
         }
+         return data;
       }
-      return data;
+     
 
 }
 const rateMovies = () => {
-    const movieContainer = document.getElementById("movies");
+   const movieContainer = document.getElementById("movies");
    
+    let html = 'Select the movie you want to rate';
     for (let movie of movieDatabase) {
-       
+        html += `<a href="#"><h1>${movie.title}</h1></a>`;
       }
+     movieContainer.innerHTML = html;
 
 }
 
 //render data functions
 
 //render worst movie
-const renderWorstMovie = () => {
+const renderFunctions = {
+  renderWorstMovie : function() {
 
-  const movieContainer = document.getElementById("movies");
+    const movieContainer = document.getElementById("movies");
+    var output = "Worst rated movie is:"
+    var movie = getWorstRatedMovie();
 
-  var movie = getWorstRatedMovie();
 
-  movieContainer.innerHTML = `<h1>Worst rated movie: ${movie}</h1>`;
-}
-//render best rated movie
-const renderBestMovie = () => {
+    movieContainer.innerHTML = output + `<h1>${movie}</h1>`;
+  },
 
-  const movieContainer = document.getElementById("movies");
+  renderBestMovie : function(){
 
-  var movie = getBestRatedMovie();
+    const movieContainer = document.getElementById("movies");
+    var output = "Best rated movie is:"
+    var movie = getBestRatedMovie();
 
-  movieContainer.innerHTML = `<h1>Best rated movie: ${movie}</h1>`;
-}
+  movieContainer.innerHTML = output + `<h1>${movie}</h1>`;
+  },
 
-//render movies by year
-const renderMoviesByYear = () => {
+  renderMoviesByYear : function(){
 
-  const movieContainer = document.getElementById("movies");
+    const movieContainer = document.getElementById("movies");
 
-  var data = getMovieByYear();
-console.log(data);
+    var data = getMovieByYear();
 
- for (let movie of data) {
-       movieContainer.innerHTML += `<h1>Displaying movies from ${movie.year}: ${movie.title}</h1>`;
-      }
-      // for(i = 0; i < data.length; i++) {
-      //  movieContainer.innerHTML = `<h1>Displaying best movies from year ${data[i].year}: ${data[i].title}</h1>`;
-      // }
+  for (let movie of data) {
+        movieContainer.innerHTML = `<h1>Displaying movies from ${movie.year}: ${movie.title}</h1>`;
+        }
+  },
+
+  renderMoviesByGenre : function(){
+
+    const movieContainer = document.getElementById("movies");
+    var data = getMovieByGenre();
+    var output = "Displaying movies from genre";
+    for (let movie of data){
+      movieContainer.innerHTML = output + `<h1> ${movie.genre}: ${movie.title}</h1>`;
+    }
+  }
+
 }
 
 
@@ -153,8 +165,8 @@ console.log(data);
 //buttons
 document.getElementById("movieForm").addEventListener("submit", submitForm);
 document.getElementById("showAllMovies").addEventListener("click", getMovies);
-document.getElementById("getWorstMovie").addEventListener("click", renderWorstMovie);
-document.getElementById("getTopMovie").addEventListener("click", renderBestMovie);
-document.getElementById("movieByGenre").addEventListener("click", getMovieByGenre);
-document.getElementById("movieByYear").addEventListener("click", renderMoviesByYear);
+document.getElementById("getWorstMovie").addEventListener("click", renderFunctions.renderWorstMovie);
+document.getElementById("getTopMovie").addEventListener("click", renderFunctions.renderBestMovie);
+document.getElementById("movieByGenre").addEventListener("click", renderFunctions.renderMoviesByGenre);
+document.getElementById("movieByYear").addEventListener("click", renderFunctions.renderMoviesByYear);
 document.getElementById("rateMovies").addEventListener("click", rateMovies);
