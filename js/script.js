@@ -11,6 +11,10 @@ class Movie {
 
 var movieDatabase = [];
 
+//the form which handles all the input values and pushes them to the moviedatabase array
+// we have a filter functions which checks for which genre is selected, and adds that to a array
+//more basic "function" for getting the rating values checks all inputs with name ratingvalue, 
+//also checks if they are checked and then grab that value
 const submitForm = (event) => {
   const output = document.getElementById("output");
 
@@ -30,10 +34,9 @@ const submitForm = (event) => {
   event.preventDefault();
 }
 
-//  console.log(JSON.stringify(genre));
 console.log(movieDatabase);
 
-
+//gets all the movies, loop through them and prints them in html container
 const getMovies = () => {
     const movieContainer = document.getElementById("movies");
    
@@ -52,6 +55,7 @@ const getMovies = () => {
 //todo
 //om två filmer har samma rating
 
+//Checks for lowest rating value in the moviedatabase and returns the title of that movie
 const getWorstRatedMovie = () => {
 
     var arr = [];
@@ -62,7 +66,7 @@ const getWorstRatedMovie = () => {
 
     return data;  
 }
-
+//checks for highest value in movies and returns the title of that movie.
 const getBestRatedMovie = () => {
 
     var arr = [];
@@ -73,7 +77,8 @@ const getBestRatedMovie = () => {
 
     return data;
 }
-//tar bara senaste
+//filters all the checkbox values and sorts and compares with actual genres in movieDatabase
+//if we get match we push them in new objects and then in data array which we can then access with render functions
 const getMovieByGenre = () => {
     const movieContainer = document.getElementById("movies");
     const genre = [].filter.call(document.getElementsByName('sortByGenre'), (c) => c.checked).map(c => c.value);
@@ -88,7 +93,8 @@ const getMovieByGenre = () => {
           })
           return data;
 }
-//visar bara senaste
+//todo: visar bara senaste
+//checks input value and see if its matches with year in moviedatabase, then returns that movie in object.
 const getMovieByYear = () => {
 
     const data = [];
@@ -100,24 +106,23 @@ const getMovieByYear = () => {
         }
          return data;
       }
-     
-
 }
-const rateMovies = () => {
-   const movieContainer = document.getElementById("movies");
+  //is this needed
+// const rateMovies = () => {
+//    const movieContainer = document.getElementById("movies");
    
-    let html = 'Select the movie you want to rate';
-    for (let movie of movieDatabase) {
-        html += `<a href="#"><h1>${movie.title}</h1></a>`;
-      }
-     movieContainer.innerHTML = html;
+//     let html = 'Select the movie you want to rate';
+//     for (let movie of movieDatabase) {
+//         html += `<a href="#"><h1>${movie.title}</h1></a>`;
+//       }
+//      movieContainer.innerHTML = html;
 
-}
+// }
 
 //render data functions
 
-//render worst movie
 const renderFunctions = {
+
   renderWorstMovie : function() {
 
     const movieContainer = document.getElementById("movies");
@@ -162,11 +167,11 @@ const renderFunctions = {
 
 
 
-//buttons
+//eventlisteners for buttons
 document.getElementById("movieForm").addEventListener("submit", submitForm);
 document.getElementById("showAllMovies").addEventListener("click", getMovies);
 document.getElementById("getWorstMovie").addEventListener("click", renderFunctions.renderWorstMovie);
 document.getElementById("getTopMovie").addEventListener("click", renderFunctions.renderBestMovie);
 document.getElementById("movieByGenre").addEventListener("click", renderFunctions.renderMoviesByGenre);
 document.getElementById("movieByYear").addEventListener("click", renderFunctions.renderMoviesByYear);
-document.getElementById("rateMovies").addEventListener("click", rateMovies);
+// document.getElementById("rateMovies").addEventListener("click", rateMovies);
