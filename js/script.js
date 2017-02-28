@@ -1,3 +1,4 @@
+//Ive choosed to use the es6 class constructor since this is the one im most familiar with
 class Movie {
   constructor(title, year, genre, rating, cover){
 
@@ -8,7 +9,7 @@ class Movie {
     this.cover = cover;
   }
 }
-
+//need to get rid of this one
 var movieDatabase = [];
 
 //the form which handles all the input values and pushes them to the moviedatabase array
@@ -52,9 +53,6 @@ const getMovies = () => {
 }
 
 
-//todo
-//om två filmer har samma rating
-
 //Checks for lowest rating value in the moviedatabase and returns the title of that movie
 const getWorstRatedMovie = () => {
 
@@ -84,17 +82,17 @@ const getMovieByGenre = () => {
     const genre = [].filter.call(document.getElementsByName('sortByGenre'), (c) => c.checked).map(c => c.value);
     const data = [];
  
-       movieDatabase.filter(movie =>{
-             for(let i = 0; i < genre.length; i++){
-                 if(movie.genre.indexOf(genre[i]) > -1){
-                     data.push({ genre: genre, title: movie.title });
-                 }
-             }
-          })
-          return data;
+    movieDatabase.filter(movie =>{
+          for(let i = 0; i < genre.length; i++){
+              if(movie.genre.indexOf(genre[i]) > -1){
+                  data.push({ genre: genre, title: movie.title });
+              }
+          }
+      })
+      return data;
 }
-//todo: visar bara senaste
-//checks input value and see if its matches with year in moviedatabase, then returns that movie in object.
+
+//checks input value and see if its matches with year in moviedatabase, then returns that movie in object with title and year.
 const getMovieByYear = () => {
 
     const data = [];
@@ -104,10 +102,11 @@ const getMovieByYear = () => {
         if(parseInt(year) == movie.year){
            data.push({ year: year, title: movie.title });
         }
-         return data;
       }
+      return data;
 }
-  //is this needed
+
+//do i want this? jesper knows
 // const rateMovies = () => {
 //    const movieContainer = document.getElementById("movies");
    
@@ -119,8 +118,8 @@ const getMovieByYear = () => {
 
 // }
 
-//render data functions
-
+//render data 
+//All these functions gets data from function and then prints it out as html, some loops are required on some data
 const renderFunctions = {
 
   renderWorstMovie : function() {
@@ -128,7 +127,6 @@ const renderFunctions = {
     const movieContainer = document.getElementById("movies");
     var output = "Worst rated movie is:"
     var movie = getWorstRatedMovie();
-
 
     movieContainer.innerHTML = output + `<h1>${movie}</h1>`;
   },
@@ -147,27 +145,31 @@ const renderFunctions = {
     const movieContainer = document.getElementById("movies");
 
     var data = getMovieByYear();
+    var output = "Displaying movies from year:";
 
-  for (let movie of data) {
-        movieContainer.innerHTML = `<h1>Displaying movies from ${movie.year}: ${movie.title}</h1>`;
-        }
+    for (let movie of data) {
+       output += `<h1>${movie.year}: ${movie.title}</h1>`;
+    }
+    movieContainer.innerHTML = output;
   },
 
   renderMoviesByGenre : function(){
 
     const movieContainer = document.getElementById("movies");
     var data = getMovieByGenre();
-    var output = "Displaying movies from genre";
+    var output = "Displaying movies from genre:";
+
     for (let movie of data){
-      movieContainer.innerHTML = output + `<h1> ${movie.genre}: ${movie.title}</h1>`;
+       output += `<h1> ${movie.genre}: ${movie.title}</h1>`;
     }
+    movieContainer.innerHTML = output;
   }
 
 }
 
 
 
-//eventlisteners for buttons
+//eventlisteners for buttons, move these?
 document.getElementById("movieForm").addEventListener("submit", submitForm);
 document.getElementById("showAllMovies").addEventListener("click", getMovies);
 document.getElementById("getWorstMovie").addEventListener("click", renderFunctions.renderWorstMovie);
@@ -175,3 +177,9 @@ document.getElementById("getTopMovie").addEventListener("click", renderFunctions
 document.getElementById("movieByGenre").addEventListener("click", renderFunctions.renderMoviesByGenre);
 document.getElementById("movieByYear").addEventListener("click", renderFunctions.renderMoviesByYear);
 // document.getElementById("rateMovies").addEventListener("click", rateMovies);
+
+
+//todo
+//validators
+//show rating on worst and best rating
+//globala objektet 
