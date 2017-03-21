@@ -1,10 +1,5 @@
 const movieModule = {
 
-  // init: function() {
-           
-  //           this.eventListeners();
-  //       },
-
   Movies: [
     {
       title : "Men In Black",
@@ -100,7 +95,6 @@ const movieModule = {
    //filters all the checkbox values and sorts and compares with actual genres in movieDatabase
   //if we get match we push them in new objects and then in data array which we can then access with render functions
    getMovieByGenre: function() {
- 
       const movieContainer = document.getElementById("movies");
       const genre = [].filter.call(document.getElementsByName('sortByGenre'), (c) => c.checked).map(c => c.value);
       const data = [];
@@ -120,12 +114,16 @@ const movieModule = {
     const data = [];
       const year = document.getElementById('movieByYearText').value;
 
+      if(year == ""){
+        alert("You have to write a year");
+      }else{
       for (let movie of movieModule.Movies) {
           if(parseInt(year) == movie.year){
             data.push(movie);
           }
         }
         return data;
+      }
     }
 };
 
@@ -135,6 +133,14 @@ console.log(movieModule.Movies);
 //render data 
 //All these functions gets data from function and then prints it out as html, some loops are required on some data
 const renderFunctions = {
+  init() {
+      document.getElementById("movieForm").addEventListener("submit", movieModule.submitForm);
+      document.getElementById("showAllMovies").addEventListener("click", movieModule.getMovies);
+      document.getElementById("getWorstMovie").addEventListener("click", renderFunctions.renderWorstMovie);
+      document.getElementById("getTopMovie").addEventListener("click", renderFunctions.renderBestMovie);
+      document.getElementById("movieByGenre").addEventListener("click", renderFunctions.renderMoviesByGenre);
+      document.getElementById("movieByYear").addEventListener("click", renderFunctions.renderMoviesByYear);
+    },
 
   renderWorstMovie : function() {
 
@@ -185,35 +191,5 @@ const renderFunctions = {
   }
 
 }
-// const eventSpace = {
-//     displayAll: function(){
-//         document.getElementById('allmovies').addEventListener('click', functionBase.showAllMovies);
-//         document.getElementById('allmovies').addEventListener('click', functionBase.displayAllMovies);
-//     },
 
-//     displayWorst: function(){
-//         document.getElementById('worstMovie').addEventListener('click', functionBase.showWorstRatedMovie);
-//     },
-
-//     displayBest: function(){
-//         document.getElementById('bestMovie').addEventListener('click', functionBase.showHighestRatedMovie);
-//     }
-
-
-// };
-
-//eventlisteners for buttons, move these?
-
-      
-      document.getElementById("movieForm").addEventListener("submit", movieModule.submitForm);
-      document.getElementById("showAllMovies").addEventListener("click", movieModule.getMovies);
-      document.getElementById("getWorstMovie").addEventListener("click", renderFunctions.renderWorstMovie);
-      document.getElementById("getTopMovie").addEventListener("click", renderFunctions.renderBestMovie);
-      document.getElementById("movieByGenre").addEventListener("click", renderFunctions.renderMoviesByGenre);
-      document.getElementById("movieByYear").addEventListener("click", renderFunctions.renderMoviesByYear);
-
-
-//todo
-//validators
-//show rating on worst and best rating
-//globala objektet 
+renderFunctions.init();
