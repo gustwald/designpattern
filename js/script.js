@@ -5,8 +5,15 @@ const movieModule = {
       title : "Men In Black",
       year: "1994",
       rating: 9,
-      genre:["Drama, Sci-Fi"],
+      genre:["Sci-Fi"],
       cover: "https://upload.wikimedia.org/wikipedia/en/thumb/f/fb/Men_in_Black_Poster.jpg/220px-Men_in_Black_Poster.jpg"
+    },
+    {
+      title : "Frost",
+      year: "2015",
+      rating: 10,
+      genre:["Drama"],
+      cover: "https://s-media-cache-ak0.pinimg.com/564x/4e/cc/3f/4ecc3fca4348d86904c75420d2c8fb81.jpg"
     },
     {
       title : "Batman",
@@ -127,9 +134,6 @@ const movieModule = {
     }
 };
 
-// movieModule.init();
-console.log(movieModule.Movies);
-
 //render data 
 //All these functions gets data from function and then prints it out as html, some loops are required on some data
 const renderFunctions = {
@@ -178,8 +182,9 @@ const renderFunctions = {
 
     const movieContainer = document.getElementById("movies");
     const data = movieModule.getMovieByGenre();
-    var output = "Displaying movies from genre: ";
 
+    var output = "Displaying movies from genre: ";
+    
     for (let movie of data){
       if(movie.genre){
        output += `<h1> ${movie.genre}: ${movie.title}</h1>`;
